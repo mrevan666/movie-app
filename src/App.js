@@ -23,10 +23,18 @@ const App = () => {
 			setMovies(responseJson.Search);
 		}
 	};
+  
 
 	const addFavouriteMovie = (movie) => {
-		const newFavouriteList = [...favourites, movie];
+    const favouriteFilter = favourites.filter((e)=>{
+      return e.imdbID === movie.imdbID;
+    })
+    if(favouriteFilter.length == 0){
+      const newFavouriteList = [...favourites, movie];
 		setFavourites(newFavouriteList);
+    }
+		
+    console.log(favouriteFilter)
 	};
 
 	const removeFavouriteMovie = (movie) => {
@@ -53,7 +61,7 @@ const App = () => {
         </div>
       </div>
       <div className='remove'>
-        <input  placeholder='Enter list name' />
+        <input placeholder='Enter list name'/>
 				<RemoveList
 					movies={favourites}
 					handleFavouritesClick={removeFavouriteMovie}
